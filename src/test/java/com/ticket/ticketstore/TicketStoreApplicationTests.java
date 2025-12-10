@@ -1,4 +1,4 @@
-package com.Ticket.TicketStore;
+package com.ticket.ticketstore;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
