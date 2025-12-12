@@ -27,7 +27,7 @@ public class User {
     
     private Boolean enabled;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     @JsonBackReference("role_user_ref")
     private Role role;

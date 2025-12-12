@@ -2,7 +2,7 @@ package com.ticket.ticketstore.service;
 
 import java.util.List;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ticket.ticketstore.dto.*;
@@ -19,7 +19,7 @@ public class UserService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder passwordEncoder;
     
 
     public List<UserGetDTO> getAllUsers(){
@@ -38,7 +38,7 @@ public class UserService {
             .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
 
         user.setRole(role);
-        user.setPassword(encoder.encode(dto.getPassword()));
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         user = userRepository.save(user);
         
@@ -55,7 +55,7 @@ public class UserService {
         user.setUserName(dto.getUserName());
         user.setEmail(dto.getEmail());
         if (!dto.getEmail().isEmpty() && dto.getEmail().isBlank()) {
-            user.setPassword(encoder.encode(dto.getPassword()));
+            user.setPassword(passwordEncoder.encode(dto.getPassword()));
         }
         user.setEnabled(dto.getEnabled());
         user.setRole(role);
